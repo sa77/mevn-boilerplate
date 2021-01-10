@@ -13,7 +13,7 @@ export interface User {
 	password: string;
 }
 
-interface UserBaseDocument extends User, Document {
+export interface UserBaseDocument extends User, Document {
 	fullName: string;
 	checkPassword: (password: string) => Promise<boolean>
 }
@@ -58,15 +58,13 @@ UserSchema.virtual("fullName").get(function (this: UserBaseDocument) {
 
 // --- methods
 UserSchema.methods.checkPassword = async function (password: string) {
-	const user = this;
-	return bcrypt.compareSync(password, user.password);
+	return bcrypt.compareSync(password, this.password);
 };
 
 // --- hooks
 UserSchema.pre<UserBaseDocument>('save', async function (next) {
-	const user = this;
-	if (user.isModified('password')) {
-		user.password = await bcrypt.hash(user.password, 8);
+	if (this.isModified('password')) {
+		this.password = await bcrypt.hash(this.password, 8);
 	}
 	next();
 });

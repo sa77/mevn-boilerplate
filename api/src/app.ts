@@ -17,10 +17,8 @@ const server: http.Server = http.createServer(app)
 const debugLog: debug.IDebugger = debug("[app]");
 
 // API docs
-const modelNames = mongoose.modelNames();
 expressOasGenerator.handleResponses(app, {
-  swaggerUiServePath: "v1/docs",
-  // mongooseModels: modelNames,
+  swaggerUiServePath: "v1/docs"
 });
 
 // --- middlewares

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import userRouter from "./users/user.routes"
 
-let router = Router();
+const router = Router();
 
 router.use('/users', userRouter);
 

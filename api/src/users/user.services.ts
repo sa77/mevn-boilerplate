@@ -1,5 +1,5 @@
 import httpStatus from "http-status"
-import UserSchema, { User, emailValidationSchema } from "./user.model"
+import UserSchema, { User, UserBaseDocument, emailValidationSchema } from "./user.model"
 import { ApiError } from "../utils";
 import * as jwt from "jsonwebtoken";
 
@@ -12,7 +12,7 @@ interface UserRegistrationRequestBody {
   password: string;
 }
 
-export const createNewUser = async (userBody: UserRegistrationRequestBody) => {
+export const createNewUser = async (userBody: UserRegistrationRequestBody): Promise<UserBaseDocument> => {
   const { email } = userBody;
   const isValid = emailValidationSchema.isValidSync({ email })
   if (!isValid) {
@@ -27,7 +27,7 @@ export const createNewUser = async (userBody: UserRegistrationRequestBody) => {
 };
 
 
-export const loginWithEmailAndPassword = async (email: string, password: string) => {
+export const loginWithEmailAndPassword = async (email: string, password: string): Promise<UserBaseDocument> => {
   const user = await UserSchema.findOne({ email })
   if (!user || !(await user.checkPassword(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
