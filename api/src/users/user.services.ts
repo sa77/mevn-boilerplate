@@ -1,5 +1,5 @@
 import httpStatus from "http-status"
-import UserSchema, { User, UserBaseDocument, emailValidationSchema } from "./user.model"
+import User, { UserModel, UserBaseDocument, emailValidationSchema } from "./user.model"
 import { ApiError } from "../utils";
 import * as jwt from "jsonwebtoken";
 
@@ -19,16 +19,16 @@ export const createNewUser = async (userBody: UserRegistrationRequestBody): Prom
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email is invalid');
   }
 
-  const existingUser = await UserSchema.findOne({ email })
+  const existingUser = await User.findOne({ email })
   if (existingUser) {
     throw new ApiError(httpStatus.BAD_REQUEST, `This email is already taken: ${email}`);
   }
-  return await UserSchema.create(userBody);
+  return await User.create(userBody);
 };
 
 
 export const loginWithEmailAndPassword = async (email: string, password: string): Promise<UserBaseDocument> => {
-  const user = await UserSchema.findOne({ email })
+  const user = await User.findOne({ email })
   if (!user || !(await user.checkPassword(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
@@ -46,7 +46,7 @@ interface GenerateAuthTokenReturnType {
   refresh: string;
 }
 
-export const generateAuthTokens = async (user: User): Promise<GenerateAuthTokenReturnType> => {
+export const generateAuthTokens = async (user: UserModel): Promise<GenerateAuthTokenReturnType> => {
   const access = jwt.sign({ sub: user.email, type: JwtTokenType.access }, JWT_SIGNING_SECRET, { expiresIn: "24h" })
   const refresh = jwt.sign({ sub: user.email, type: JwtTokenType.refresh }, JWT_SIGNING_SECRET, { expiresIn: "48h" })
 

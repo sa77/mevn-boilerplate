@@ -165,7 +165,7 @@
     "@types/qs" "*"
     "@types/range-parser" "*"
 
-"@types/express@*", "@types/express@^4.17.2", "@types/express@^4.17.9":
+"@types/express@^4.17.2", "@types/express@^4.17.9":
   version "4.17.9"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.9.tgz#f5f2df6add703ff28428add52bdec8a1091b0a78"
   integrity sha512-SDzEIZInC4sivGIFY4Sz1GG6J9UObPwCInYJjko2jzOf/Imx/dlpume6Xxwj1ORL82tBbmN4cPDIDkLbWHk9hw==
@@ -242,19 +242,6 @@
   dependencies:
     "@types/mime" "*"
     "@types/node" "*"
-
-"@types/swagger-jsdoc@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@types/swagger-jsdoc/-/swagger-jsdoc-6.0.0.tgz#4d2308b6b9a650cd476b49274889608a2b18ef46"
-  integrity sha512-0snGxQMvrPOFEFnEVcXAm8zKH7aLB5tAsUTXfWwQu7XGfMBelt+tSLzF5lH0D+ppRiZrwPnWF7f3fpDHZaWzag==
-
-"@types/swagger-ui-express@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@types/swagger-ui-express/-/swagger-ui-express-4.1.2.tgz#cfc884904a104c3193f46f423d04ee0416be1ef4"
-  integrity sha512-t9teFTU8dKe69rX9EwL6OM2hbVquYdFM+sQ0REny4RalPlxAm+zyP04B12j4c7qEuDS6CnlwICywqWStPA3v4g==
-  dependencies:
-    "@types/express" "*"
-    "@types/serve-static" "*"
 
 "@typescript-eslint/eslint-plugin@^4.12.0":
   version "4.12.0"

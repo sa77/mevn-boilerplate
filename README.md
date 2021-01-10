@@ -16,15 +16,16 @@ REST api server
 
 ```
 yarn install
-yarn serve
+yarn start
 ```
 
 Access app on development mode -  <http://localhost:8000>
+API docs -  <http://localhost:8000/v1/docs/>
 
 
 ## website
 
-client app for modern browsers
+RESTful API client app for modern browsers
 
 ### Setup
 

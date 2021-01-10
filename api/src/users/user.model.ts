@@ -6,14 +6,14 @@ export const emailValidationSchema = yup.object({
 	email: yup.string().email().required(),
 });
 
-export interface User {
+export interface UserModel {
 	firstName: string;
 	lastName: string;
 	email: string;
 	password: string;
 }
 
-export interface UserBaseDocument extends User, Document {
+export interface UserBaseDocument extends UserModel, Document {
 	fullName: string;
 	checkPassword: (password: string) => Promise<boolean>
 }
@@ -70,4 +70,4 @@ UserSchema.pre<UserBaseDocument>('save', async function (next) {
 });
 
 // export
-export default mongoose.model<UserBaseDocument>('UserSchema', UserSchema);
+export default mongoose.model<UserBaseDocument>('User', UserSchema);
